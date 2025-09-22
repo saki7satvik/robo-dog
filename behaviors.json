@@ -1,0 +1,30 @@
+{
+  "sit": {
+    "sequence": [
+      {"goal_id": "sit1", "target_positions": {"fl_hip": 30, "fl_knee": 90, "fr_hip": 30, "fr_knee": 90, "bl_hip": 30, "bl_knee": 90, "br_hip": 30, "br_knee": 90}, "duration": 1.0}
+    ]
+  },
+  "stand": {
+    "sequence": [
+      {"goal_id": "stand1", "target_positions": {"fl_hip": 0, "fl_knee": 0, "fr_hip": 0, "fr_knee": 0, "bl_hip": 0, "bl_knee": 0, "br_hip": 0, "br_knee": 0}, "duration": 1.0}
+    ]
+  },
+  "wave_paw": {
+    "sequence": [
+      {"goal_id": "wave1", "target_positions": {"fl_hip": 30, "fl_knee": 45}, "duration": 0.5},
+      {"goal_id": "wave2", "target_positions": {"fl_hip": 0, "fl_knee": 90}, "duration": 0.5}
+    ]
+  },
+  "bow": {
+    "sequence": [
+      {"goal_id": "bow1", "target_positions": {"fl_hip": 45, "fl_knee": 90, "fr_hip": 45, "fr_knee": 90, "bl_hip": -30, "bl_knee": 0, "br_hip": -30, "br_knee": 0}, "duration": 1.2},
+      {"goal_id": "bow2", "target_positions": {"fl_hip": 0, "fl_knee": 0, "fr_hip": 0, "fr_knee": 0, "bl_hip": 0, "bl_knee": 0, "br_hip": 0, "br_knee": 0}, "duration": 1.0}
+    ]
+  },
+  "shake": {
+    "sequence": [
+      {"goal_id": "shake1", "target_positions": {"fr_hip": 45, "fr_knee": 45}, "duration": 0.5},
+      {"goal_id": "shake2", "target_positions": {"fr_hip": 0, "fr_knee": 90}, "duration": 0.5}
+    ]
+  }
+}
