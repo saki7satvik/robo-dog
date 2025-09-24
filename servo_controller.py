@@ -26,6 +26,9 @@ class ServoController:
         """
         self.freq = freq
         self.simulate = simulate_if_no_hw and not _HAS_HW
+        if(self.simulate):
+            print("simulation mode")
+    
         self._load_map(servo_map_path)
         # setup PCA devices (one per board address)
         self._pca_devices = {}
@@ -41,8 +44,14 @@ class ServoController:
         self._current_pose = {}
         for nm, cfg in self.servos.items():
             self._current_pose[nm] = cfg.get("neutral", (cfg["angle_min"] + cfg["angle_max"]) / 2.0)
+        
+        print(self._current_pose)
 
         self._enabled = True  # used by emergency_stop
+
+        neutral_pose = {nm: ang for nm, ang in self._current_pose.items()}
+        self.set_pose(neutral_pose)
+        print("[INFO] Robot dog initialized to neutral pose ✅")
 
     def _load_map(self, path):
         with open(path, "r") as f:
@@ -186,3 +195,8 @@ class ServoController:
 
     def enable_outputs(self):
         self._enabled = True
+
+if __name__ == "__main__":
+    print("====== robo dog initialization ======")
+    Dog = ServoController("servo_map_dog.json", simulate_if_no_hw=True)
+    # print(Dog.get_current_pose())
