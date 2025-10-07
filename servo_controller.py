@@ -97,15 +97,13 @@ class ServoController:
         # 3️⃣ Clamp to range
         angle = max(amin, min(amax, angle))
     
-        # 4️⃣ Map angle -> pulse width (us)
+        # 4️⃣ Map angle -> pulse width (us) using FULL 0-180 range
+        # This ensures consistent mapping regardless of min/max angle limits
         min_us = cfg.get("min_pulse_us", 500)
         max_us = cfg.get("max_pulse_us", 2500)
-        span = amax - amin
-    
-        if span <= 0:
-            us = (min_us + max_us) / 2.0
-        else:
-            us = min_us + ((angle - amin) / span) * (max_us - min_us)
+        
+        # Use full 0-180 range for pulse width calculation
+        us = min_us + (angle/180.0) * (max_us - min_us)
     
         # 5️⃣ Convert pulse width -> 12-bit duty
         period_us = 1_000_000.0 / self.freq  # e.g. 20000us for 50Hz
