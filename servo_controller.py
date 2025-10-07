@@ -83,34 +83,36 @@ class ServoController:
 
     # --- angle -> PCA 12-bit conversion ---
     def _angle_to_pwm12(self, angle_deg, cfg):
-        # apply offset & reverse
-        angle = angle_deg + cfg.get("offset", 0)
-        if cfg.get("reversed", False):
-            mid = (cfg["angle_min"] + cfg["angle_max"]) / 2.0
-            angle = mid - (angle - mid)
-
-        # clamp
         amin, amax = cfg["angle_min"], cfg["angle_max"]
-        if angle < amin:
-            angle = amin
-        if angle > amax:
-            angle = amax
-
-        # map angle -> microseconds
+        offset = cfg.get("offset", 0)
+        reversed_ = cfg.get("reversed", False)
+    
+        # 1️⃣ Apply offset
+        angle = angle_deg + offset
+    
+        # 2️⃣ Apply reversal correctly (mirror around full range)
+        if reversed_:
+            angle = amax - (angle - amin)
+    
+        # 3️⃣ Clamp to range
+        angle = max(amin, min(amax, angle))
+    
+        # 4️⃣ Map angle -> pulse width (us)
         min_us = cfg.get("min_pulse_us", 500)
         max_us = cfg.get("max_pulse_us", 2500)
-        # Protect division by zero
-        span = (amax - amin)
+        span = amax - amin
+    
         if span <= 0:
             us = (min_us + max_us) / 2.0
         else:
             us = min_us + ((angle - amin) / span) * (max_us - min_us)
-
-        # convert us -> 12-bit duty (0..4095)
-        period_us = 1_000_000.0 / self.freq  # e.g., 20,000 for 50Hz
+    
+        # 5️⃣ Convert pulse width -> 12-bit duty
+        period_us = 1_000_000.0 / self.freq  # e.g. 20000us for 50Hz
         duty_fraction = us / period_us
         pwm12 = int(round(max(0, min(4095, duty_fraction * 4096))))
         return pwm12
+
 
     # low-level write to PCA device
     def _write_pwm(self, board_addr, channel, pwm12):
