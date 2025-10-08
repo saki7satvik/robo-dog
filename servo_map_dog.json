@@ -6,20 +6,20 @@
     "created": "2025-09-23"
   },
   "servos": [
-    { "name":"fl_hip",   "board_addr":"0x40","channel":1,  "group":"front_left_leg",  "angle_min":0,  "angle_max":135, "neutral":90,  "offset":0, "reversed":false, "min_pulse_us":600, "max_pulse_us":2400, "default_speed_dps":200 },
-    { "name":"fl_thigh", "board_addr":"0x40","channel":2,  "group":"front_left_leg",  "angle_min":0,  "angle_max":180, "neutral":115, "offset":0, "reversed":false, "min_pulse_us":600, "max_pulse_us":2400, "default_speed_dps":200 },
-    { "name":"fl_knee",  "board_addr":"0x40","channel":3,  "group":"front_left_leg",  "angle_min":0,  "angle_max":180, "neutral":90, "offset":0, "reversed":false, "min_pulse_us":600, "max_pulse_us":2400, "default_speed_dps":200 },
+    { "name":"fl_hip",   "board_addr":"0x40","channel":1,  "group":"front_left_leg",  "angle_min":0,  "angle_max":135, "neutral":90,  "offset":0, "reversed":false, "min_pulse_us":500, "max_pulse_us":2500, "default_speed_dps":200 },
+    { "name":"fl_thigh", "board_addr":"0x40","channel":2,  "group":"front_left_leg",  "angle_min":0,  "angle_max":180, "neutral":115, "offset":0, "reversed":false, "min_pulse_us":500, "max_pulse_us":2500, "default_speed_dps":200 },
+    { "name":"fl_knee",  "board_addr":"0x40","channel":3,  "group":"front_left_leg",  "angle_min":0,  "angle_max":180, "neutral":90, "offset":0, "reversed":false, "min_pulse_us":500, "max_pulse_us":2500, "default_speed_dps":200 },
 
-    { "name":"fr_hip",   "board_addr":"0x40","channel":5,  "group":"front_right_leg", "angle_min":0,  "angle_max":135, "neutral":90,  "offset":0, "reversed":true,  "min_pulse_us":600, "max_pulse_us":2400, "default_speed_dps":200 },
-    { "name":"fr_thigh", "board_addr":"0x40","channel":6,  "group":"front_right_leg", "angle_min":0,  "angle_max":180, "neutral":115,  "offset":0, "reversed":true,  "min_pulse_us":600, "max_pulse_us":2400, "default_speed_dps":200 },
-    { "name":"fr_knee",  "board_addr":"0x40","channel":7,  "group":"front_right_leg", "angle_min":0,  "angle_max":180, "neutral":90, "offset":0, "reversed":true,  "min_pulse_us":600, "max_pulse_us":2400, "default_speed_dps":200 },
+    { "name":"fr_hip",   "board_addr":"0x40","channel":5,  "group":"front_right_leg", "angle_min":0,  "angle_max":135, "neutral":90,  "offset":0, "reversed":true,  "min_pulse_us":500, "max_pulse_us":2500, "default_speed_dps":200 },
+    { "name":"fr_thigh", "board_addr":"0x40","channel":6,  "group":"front_right_leg", "angle_min":0,  "angle_max":180, "neutral":115,  "offset":0, "reversed":true,  "min_pulse_us":500, "max_pulse_us":2500, "default_speed_dps":200 },
+    { "name":"fr_knee",  "board_addr":"0x40","channel":7,  "group":"front_right_leg", "angle_min":0,  "angle_max":180, "neutral":90, "offset":0, "reversed":true,  "min_pulse_us":500, "max_pulse_us":2500, "default_speed_dps":200 },
 
-    { "name":"bl_hip",   "board_addr":"0x40","channel":9,  "group":"back_left_leg",   "angle_min":0,  "angle_max":135, "neutral":90,  "offset":0, "reversed":false, "min_pulse_us":600, "max_pulse_us":2400, "default_speed_dps":200 },
-    { "name":"bl_thigh", "board_addr":"0x40","channel":10,  "group":"back_left_leg",   "angle_min":0,  "angle_max":180, "neutral":115,  "offset":0, "reversed":false, "min_pulse_us":600, "max_pulse_us":2400, "default_speed_dps":200 },
-    { "name":"bl_knee",  "board_addr":"0x40","channel":11,  "group":"back_left_leg",   "angle_min":0,  "angle_max":180, "neutral":90, "offset":0, "reversed":false, "min_pulse_us":600, "max_pulse_us":2400, "default_speed_dps":200 },
+    { "name":"br_hip",   "board_addr":"0x40","channel":9,  "group":"back_left_leg",   "angle_min":0,  "angle_max":135, "neutral":90,  "offset":0, "reversed":false, "min_pulse_us":500, "max_pulse_us":2500, "default_speed_dps":200 },
+    { "name":"br_thigh", "board_addr":"0x40","channel":10,  "group":"back_left_leg",   "angle_min":0,  "angle_max":180, "neutral":115,  "offset":0, "reversed":true, "min_pulse_us":500, "max_pulse_us":2500, "default_speed_dps":200 },
+    { "name":"br_knee",  "board_addr":"0x40","channel":11,  "group":"back_left_leg",   "angle_min":0,  "angle_max":180, "neutral":90, "offset":0, "reversed":true, "min_pulse_us":500, "max_pulse_us":2500, "default_speed_dps":200 },
 
-    { "name":"br_hip",   "board_addr":"0x40","channel":13,  "group":"back_right_leg",  "angle_min":0,  "angle_max":135, "neutral":90,  "offset":0, "reversed":true,  "min_pulse_us":600, "max_pulse_us":2400, "default_speed_dps":200 },
-    { "name":"br_thigh", "board_addr":"0x40","channel":14, "group":"back_right_leg",  "angle_min":0,  "angle_max":180, "neutral":115, "offset":0, "reversed":true,  "min_pulse_us":600, "max_pulse_us":2400, "default_speed_dps":200 },
-    { "name":"br_knee",  "board_addr":"0x40","channel":15, "group":"back_right_leg",  "angle_min":0,  "angle_max":180, "neutral":90, "offset":0, "reversed":true,  "min_pulse_us":600, "max_pulse_us":2400, "default_speed_dps":200 }
+    { "name":"bl_hip",   "board_addr":"0x40","channel":13,  "group":"back_right_leg",  "angle_min":0,  "angle_max":135, "neutral":90,  "offset":-5, "reversed":true,  "min_pulse_us":500, "max_pulse_us":2500, "default_speed_dps":200 },
+    { "name":"bl_thigh", "board_addr":"0x40","channel":14, "group":"back_right_leg",  "angle_min":0,  "angle_max":180, "neutral":115, "offset":0, "reversed":false,  "min_pulse_us":500, "max_pulse_us":2500, "default_speed_dps":200 },
+    { "name":"bl_knee",  "board_addr":"0x40","channel":15, "group":"back_right_leg",  "angle_min":0,  "angle_max":180, "neutral":90, "offset":0, "reversed":false,  "min_pulse_us":500, "max_pulse_us":2500, "default_speed_dps":200 }
   ]
 }
