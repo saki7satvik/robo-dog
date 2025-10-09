@@ -83,33 +83,53 @@ class ServoController:
 
     # --- angle -> PCA 12-bit conversion ---
     def _angle_to_pwm12(self, angle_deg, cfg):
+        """
+        Convert desired servo angle to 12-bit PWM value for PCA9685.
+
+        Logic:
+        - Mapping is always done over the full 0–180° servo range.
+        - Each servo has its own mechanical limits (angle_min / angle_max),
+        and those are respected by clamping.
+        - If reversed=True:
+            0° → 180°
+            135° → 45°
+            90° → 90°  (neutral remains the same)
+        """
+
         amin, amax = cfg["angle_min"], cfg["angle_max"]
         offset = cfg.get("offset", 0)
         reversed_ = cfg.get("reversed", False)
-    
-        # 1️⃣ Apply offset
+
+        # --- 1️⃣ Apply offset ---
         angle = angle_deg + offset
-    
-        # 2️⃣ Apply reversal correctly (mirror around full range)
+
+        # --- 2️⃣ Apply reversal ---
+        # Mirroring around 180° so 0 → 180, 135 → 45, 90 → 90
         if reversed_:
-            angle = amax - (angle - amin)
-    
-        # 3️⃣ Clamp to range
-        angle = max(amin, min(amax, angle))
-    
-        # 4️⃣ Map angle -> pulse width (us) using FULL 0-180 range
-        # This ensures consistent mapping regardless of min/max angle limits
+            angle = 180 - angle
+
+        # --- 3️⃣ Clamp to physical movement limits ---
+        if reversed_:
+            logical_min = 180 - amax
+            logical_max = 180 - amin
+        else:
+            logical_min = amin
+            logical_max = amax
+
+        angle = max(logical_min, min(logical_max, angle))
+
+        # --- 4️⃣ Map angle → pulse width using full 0–180° range ---
         min_us = cfg.get("min_pulse_us", 500)
         max_us = cfg.get("max_pulse_us", 2500)
-        
-        # Use full 0-180 range for pulse width calculation
-        us = min_us + (angle/180.0) * (max_us - min_us)
-    
-        # 5️⃣ Convert pulse width -> 12-bit duty
-        period_us = 1_000_000.0 / self.freq  # e.g. 20000us for 50Hz
+        us = min_us + (angle / 180.0) * (max_us - min_us)
+
+        # --- 5️⃣ Convert pulse width → 12-bit PWM value ---
+        period_us = 1_000_000.0 / self.freq  # e.g., 20,000 µs for 50 Hz
         duty_fraction = us / period_us
         pwm12 = int(round(max(0, min(4095, duty_fraction * 4096))))
+
         return pwm12
+
 
 
     # low-level write to PCA device
